@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar Proyectos - UniProjects</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para calificaciones */
+        .star-rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            text-align: left;
+        }
+
+        .star-rating>label {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .star-rating>label:hover,
+        .star-rating>label:hover~label,
+        .star-rating>input:checked~label {
+            color: #ffca08;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Explorar Proyectos</h1>
+
+        <!-- Filtros de Búsqueda -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <select id="categoryFilter" class="form-select">
+                    <option selected>Todas las Categorías</option>
+                    <option>Tecnología</option>
+                    <option>Ciencias</option>
+                    <option>Humanidades</option>
+                    <option>Ingeniería</option>
+                    <option>Arte</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select id="ratingFilter" class="form-select">
+                    <option selected>Calificación</option>
+                    <option>5 estrellas</option>
+                    <option>4 estrellas o más</option>
+                    <option>3 estrellas o más</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="date" id="dateFilter" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="searchInput" class="form-control" placeholder="Buscar proyectos...">
+            </div>
+        </div>
+
+        <!-- Lista de Proyectos Explorados -->
+        <div class="row mt-4" id="exploredProjects">
+            <!-- Proyectos se cargarán dinámicamente aquí -->
+        </div>
+    </div>
+
+    <!-- Modal para Reseñas -->
+    <div class="modal fade" id="reviewModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dejar Reseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                    <textarea id="reviewText" class="form-control mt-3" rows="4"
+                        placeholder="Escribe tu reseña aquí..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Enviar Reseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Datos de ejemplo de proyectos
+        const sampleProjects = [
+            {
+                title: 'Sistema de Monitoreo Ambiental',
+                description: 'Aplicación IoT para medir contaminación en tiempo real',
+                category: 'Tecnología',
+                rating: 4.5,
+                date: '2024-03-15'
+            },
+            {
+                title: 'Análisis de Datos Genómicos',
+                description: 'Estudio comparativo de secuencias genéticas',
+                category: 'Ciencias',
+                rating: 4.8,
+                date: '2024-02-20'
+            }
+            // Más proyectos de ejemplo...
+        ];
+
+        const exploredProjects = document.getElementById('exploredProjects');
+
+        function renderProjects(projects) {
+            exploredProjects.innerHTML = projects.map(project => `
+                <div class="col-md-4 mb-4">
+                    <div class="card project-card">
+                        <div class="card-body">
+                            <h5 class="card-title">${project.title}</h5>
+                            <p class="card-text">${project.description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">${project.category}</span>
+                                <div class="text-warning">
+                                    ${'★'.repeat(Math.floor(project.rating))}
+                                    ${'☆'.repeat(5 - Math.floor(project.rating))}
+                                    (${project.rating})
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                    Dejar Reseña
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Renderizar proyectos iniciales
+        renderProjects(sampleProjects);
+
+        // Filtrado dinámico
+        document.getElementById('categoryFilter').addEventListener('change', filterProjects);
+        document.getElementById('ratingFilter').addEventListener('change', filterProjects);
+        document.getElementById('dateFilter').addEventListener('change', filterProjects);
+        document.getElementById('searchInput').addEventListener('input', filterProjects);
+
+        function filterProjects() {
+            const category = document.getElementById('categoryFilter').value;
+            const rating = document.getElementById('ratingFilter').value;
+            const date = document.getElementById('dateFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const filteredProjects = sampleProjects.filter(project => {
+                const matchCategory = category === 'Todas las Categorías' || project.category === category;
+                const matchRating = rating === 'Calificación' ||
+                    (rating === '5 estrellas' && project.rating === 5) ||
+                    (rating === '4 estrellas o más' && project.rating >= 4) ||
+                    (rating === '3 estrellas o más' && project.rating >= 3);
+                const matchDate = !date || project.date === date;
+                const matchSearch = !searchTerm ||
+                    project.title.toLowerCase().includes(searchTerm) ||
+                    project.description.toLowerCase().includes(searchTerm);
+
+                return matchCategory && matchRating && matchDate && matchSearch;
+            });
+
+            renderProjects(filteredProjects);
+        }
+    </script>
+</body>
+
+</html>
