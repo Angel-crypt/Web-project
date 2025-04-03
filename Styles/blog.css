@@ -1,0 +1,119 @@
+.community-page {
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.community-title {
+    color: var(--foreground);
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.post-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+}
+
+.card {
+    background-color: var(--card);
+    color: var(--foreground);
+    font-weight: 700;
+}
+
+.list-group-item {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.list-group-item:hover {
+    background-color: var(--input);
+}
+
+.text-muted {
+    color: var(--card-foreground) !important;
+}
+
+/* Estilo de Tarjeta para Nuevo Proyecto */
+.form-control,
+.form-select,
+.form-control::placeholder {
+    background-color: var(--input);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--input);
+    border-color: var(--primary);
+    color: var(--foreground);
+    box-shadow: 0 0 0 0.25rem var(--ring);
+}
+
+.modal-content {
+    background-color: var(--background);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--card);
+    border-top: 1px solid var(--border);
+}
+
+.footer-title {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+.footer-link {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+.social-links a {
+    color: var(--foreground);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+}
+
+.newsletter-form .form-control {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.form-control::placeholder {
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary);
+}

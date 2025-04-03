@@ -1,0 +1,95 @@
+.card {
+    background-color: var(--card);
+    color: var(--foreground);
+    font-weight: 700;
+}
+
+.bg-light {
+    background-color: var(--card) !important;
+}
+
+.bg-white {
+    background-color: var(--card) !important;
+}
+
+.dropdown-menu {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+}
+.dropdown-item {
+    background-color: var(--card);
+    color: var(--foreground);
+}
+
+.list-group-item {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.list-group-item:hover {
+    background-color: var(--primary);
+    color: #fafafa;
+}
+
+.text-muted {
+    color: var(--card-foreground) !important;
+}
+
+.breadcrumb-item.active {
+    color: rgb(55 155 255 / 75%);
+}
+
+.img-large {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--card);
+    border-top: 1px solid var(--border);
+}
+
+.footer-title {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+.footer-link {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+.social-links a {
+    color: var(--foreground);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+}
+
+.newsletter-form .form-control {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.form-control::placeholder {
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary);
+}

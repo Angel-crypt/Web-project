@@ -1,17 +1,3 @@
-#tagsContainer .badge {
-    background-color: #007bff;
-    color: white;
-    font-size: 14px;
-    padding: 6px 12px;
-    margin: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#tagsContainer .badge:hover {
-    background-color: #0056b3;
-}
-
 #suggestionsBox {
     position: absolute;
     width: 100%;
@@ -34,36 +20,12 @@
     color: var(--card-foreground) !important;
 }
 
-/* Estilo de Estado */ 
-.despegando {
-    background-color: #026b8b;
-}
-
-.en-marcha {
-    background-color: #f0ad4e;
-}
-
-.en-fuego {
-    background-color: #28a745;
-}
-
-.en-standby {
-    background-color: #6c757d;
-}
-
-.mision-cumplida {
-    background-color: #6f42c1;
-}
-
-.en-boceto {
-    background-color: #ffc107;
-    color: #212529;
-}
-
 /* Estilo de Etiquetas */
+#tagsContainer 
 .badge {
     display: inline-block;
-    padding: 0.5em 0.8em;
+    background-color: #6e0101;
+    padding: 0.2em 0.5em;
     font-weight: 500;
     border-radius: 20px;
     color: #F5F3EB;
@@ -92,9 +54,9 @@
     color: #e0e0e0;
 }
 
-.badge-inno{
-    background-color: var(--inno);
-    color: #e0e0e0;
+.badge-innovation {
+    background-color: var(--innovation);
+    color: #1A1A1A;
 }
 
 .badge-health {
@@ -187,9 +149,63 @@
 }
 
 .progress {
-    background-color: var(--input);
+    background-color: var(--border);
 }
 
 .progress-bar {
     background-color: var(--primary);
+}
+
+/* Estilo de Busqueda*/
+.filter-card {
+    background-color: var(--card);
+}
+
+/* Footer */
+/* Footer */
+.footer {
+    background-color: var(--card);
+    border-top: 1px solid var(--border);
+}
+
+.footer-title {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+.footer-link {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+.social-links a {
+    color: var(--foreground);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+}
+
+.newsletter-form .form-control {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.form-control::placeholder {
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary);
 }
