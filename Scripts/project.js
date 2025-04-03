@@ -13,7 +13,7 @@ async function loadProjectDetails(projectId) {
                                 <li class="breadcrumb-item">
                                     <a href="projects.html" class="text-decoration-none">Proyectos</a>
                                 </li>
-                                <li class="breadcrumb-item active fw-medium">${project.name}</li>
+                                <li class="breadcrumb-item active fw-medium">/ ${project.name}</li>
                             </ol>
                         </nav>
                     </div>
@@ -30,7 +30,7 @@ async function loadProjectDetails(projectId) {
                         </div>
                     </div>
                     <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                        <button class="btn btn-outline-primary me-2 shadow-sm favorite-btn" id="favoriteButton" onclick="toggleFavorite('${project.id}')">
+                        <button class="btn btn-outline-primary me-2 shadow-sm favorite-btn" id="favoriteButton" onclick="toggleFavorite(${project.id})">
                             <i class="bi bi-star" id="favoriteIcon"></i>
                         </button>
                         <div class="dropdown d-inline-block">
@@ -38,11 +38,11 @@ async function loadProjectDetails(projectId) {
                                 <i class="bi bi-share-fill me-1"></i> Compartir
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="shareButton">
-                                <li><a class="dropdown-item" href="#" onclick="shareProject('email', project.id)"><i class="bi bi-envelope me-2 text-secondary"></i>Correo electrónico</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="shareProject('whatsapp', project.id)"><i class="bi bi-whatsapp me-2 text-success"></i>WhatsApp</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="shareProject('telegram', project.id)"><i class="bi bi-telegram me-2 text-primary"></i>Telegram</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="shareProject('email', ${project.id})"><i class="bi bi-envelope me-2 text-secondary"></i>Correo electrónico</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="shareProject('whatsapp', ${project.id})"><i class="bi bi-whatsapp me-2 text-success"></i>WhatsApp</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="shareProject('telegram', ${project.id})"><i class="bi bi-telegram me-2 text-primary"></i>Telegram</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#" onclick="copyProjectLink(project.id)"><i class="bi bi-link-45deg me-2 text-info"></i>Copiar enlace</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="copyProjectLink(${project.id})"><i class="bi bi-link-45deg me-2 text-info"></i>Copiar enlace</a></li>
                             </ul>
                         </div>
                     </div>
@@ -63,9 +63,14 @@ async function loadProjectDetails(projectId) {
                                 <!-- Galería de imágenes mejorada -->
                                 <div class="project-gallery mb-4 mt-4">
                                     <div class="row g-3">
-                                        ${project.images.map(img => `
-                                            <div class="col-md-6">
+                                        ${project.images.map((img, index) => `
+                                            <div class="col-md-6 position-relative">
                                                 <img src="${img}" class="img-fluid rounded-3 shadow-sm img-large" alt="Imagen del proyecto">
+                                                ${index === project.images.length - 1 ? `
+                                                    <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50 text-white rounded-3">
+                                                        <span class="fw-bold">Ver más</span>
+                                                    </div>
+                                                ` : ''}
                                             </div>
                                         `).join('')}
                                     </div>
@@ -77,7 +82,7 @@ async function loadProjectDetails(projectId) {
                                     <ul class="list-group list-group-flush">
                                         ${project.features.map(feature => `
                                             <li class="list-group-item ps-0 border-0 d-flex align-items-center">
-                                                <i class="bi bi-check-lg text-success me-2"></i>${feature}
+                                                <i class="icon-per bi bi-check-lg text-success me-2"></i>${feature}
                                             </li>
                                         `).join('')}
                                     </ul>
@@ -93,12 +98,12 @@ async function loadProjectDetails(projectId) {
                             <div class="card-body">
                                 <div class="list-group">
                                     ${project.documents.map(doc => `
-                                        <a href="${doc.link}" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 border-bottom py-3 px-0">
+                                        <a href="${doc.link}" download="${doc.name}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 border-bottom py-3 px-0">
                                             <div>
-                                                <i class="${doc.icon} me-2 text-primary"></i>
+                                                <i class="${doc.icon} me-2 icon-per"></i>
                                                 <span class="fw-medium">${doc.name}</span>
                                             </div>
-                                            <span class="badge bg-light text-primary rounded-pill shadow-sm">${doc.size}</span>
+                                            <span class="badge icon-per">${doc.size}</span>
                                         </a>
                                     `).join('')}
                                 </div>
@@ -269,7 +274,6 @@ function checkFavoriteStatus(projectId) {
 
 function updateFavoriteButton(isFavorite) {
     const icon = document.getElementById('favoriteIcon');
-    const text = document.getElementById('favoriteText');
     const favoriteBtn = document.getElementById('favoriteButton');
 
     if (isFavorite) {
@@ -283,42 +287,41 @@ function updateFavoriteButton(isFavorite) {
     }
 }
 
-// Función para compartir el proyecto
+
 function shareProject(platform, projectId) {
-    const projectUrl = `${window.location.origin}/project.html?id=${projectId}`;
-    const projectTitle = document.querySelector('.project-title').textContent; // Obtener el título del proyecto
+    let shareUrl = `https://example.com/project/${projectId}`;
+    let message = `¡Mira este increíble proyecto en ProjectHub!
+    
+                    Descúbrelo aquí: https://example.com/project/1
+                    
+                    ProjectHub es el lugar perfecto para estudiantes y profesionales que buscan gestionar sus proyectos de manera efectiva y colaborar sin barreras.
+
+                    ¡Explora, comparte y crece con nosotros!
+                    `;
 
     switch (platform) {
         case 'email':
-            window.location.href = `mailto:?subject=Proyecto: ${encodeURIComponent(projectTitle)}&body=${encodeURIComponent('Te comparto este proyecto: ' + projectUrl)}`;
+            window.location.href = `mailto:?subject=Proyecto&body=${message}`;
             break;
         case 'whatsapp':
-            window.open(`https://wa.me/?text=${encodeURIComponent('Te comparto este proyecto: ' + projectTitle + ' ' + projectUrl)}`, '_blank');
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
             break;
         case 'telegram':
-            window.open(`https://t.me/share/url?url=${encodeURIComponent(projectUrl)}&text=${encodeURIComponent('Te comparto este proyecto: ' + projectTitle)}`, '_blank');
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=Proyecto`, '_blank');
             break;
         default:
-            break;
+            console.log('Plataforma no soportada');
     }
 }
 
 function copyProjectLink(projectId) {
-    const projectUrl = `${window.location.origin}/project.html?id=${projectId}`;
-
-    navigator.clipboard.writeText(projectUrl).then(() => {
-        showNotification('Enlace copiado', 'El enlace del proyecto ha sido copiado al portapapeles.');
+    const shareUrl = `https://example.com/project/${projectId}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        alert('Enlace copiado al portapapeles: ' + shareUrl);
     }).catch(err => {
         console.error('Error al copiar el enlace: ', err);
     });
 }
-
-// Función para copiar el enlace al portapapeles
-document.addEventListener('DOMContentLoaded', function () {
-    const projectId = getQueryParam('id'); // Obtener el ID del proyecto de la URL
-    loadProjectDetails(projectId); // Cargar los detalles del proyecto
-    checkFavoriteStatus(projectId); // Verificar el estado de favorito
-});
 
 // Función para mostrar notificaciones
 function showNotification(title, message) {

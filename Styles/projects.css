@@ -34,7 +34,7 @@
 }
 
 .badge-general {
-    background-color: var(--secondary-foreground);
+    background-color: var(--input);
     color: var(--foreground);
 }
 

@@ -1,7 +1,7 @@
 const defaultProjects = [
     {   
         id: 1,
-        name: " con IA",
+        name: "Aprendizaje con IA",
         description: "Desarrollo inicial de una plataforma educativa con inteligencia artificial.",
         status: "despegando",
         progress: 10,

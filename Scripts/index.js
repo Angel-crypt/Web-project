@@ -1,26 +1,4 @@
-function toggleTheme() {
-    const body = document.body;
-    body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
-}
-
-function getStatusEmoji(status) {
-    const emojis = {
-        "despegando": "🚀",
-        "marcha": "⚙️",
-        "fuego": "🔥",
-        "standby": "⏸️",
-        "terminado": "🏁",
-        "bocetando": "📝"
-    };
-    return emojis[status] || "";
-}
-
-function formatStatus(status) {
-    return status.replace("-", " ").toUpperCase();
-}
-
 // Animacion de texto
-
 const texts = [
     "Lleva tus proyectos al siguiente nivel",
     "Comparte, aprende y crece con la comunidad universitaria",
@@ -32,9 +10,12 @@ const texts = [
 let currentTextIndex = 0;
 let currentCharIndex = 0;
 const typingSpeed = 100;
-const eraseSpeed = 2
-5;
+const eraseSpeed = 25; // Corrige el valor de eraseSpeed
 const pauseBetweenTexts = 2500;
+
+document.addEventListener('DOMContentLoaded', function () {
+    type();
+});
 
 function type() {
     const currentText = texts[currentTextIndex];
@@ -58,7 +39,7 @@ function erase() {
         setTimeout(type, typingSpeed + 1000);
     }
 }
-type();
+
 
 // Animacion de circulos en mouse
 

@@ -8,8 +8,9 @@
         "description": "Desarrollo inicial de una plataforma educativa con inteligencia artificial.",
         "images": [
             "images/projects/aprendizaje.webp",
-            "images/projects/aprendizaje.webp",
-            "images/projects/aprendizaje.webp"
+            "images/projects/aprendizaje_2.webp",
+            "images/projects/aprendizaje_3.webp",
+            "images/projects/aprendizaje_4.webp"
         ],
         "features": [
             "Sistema de recomendación personalizado",
@@ -21,7 +22,7 @@
         "documents": [
             {
                 "name": "Propuesta del Proyecto.pdf",
-                "link": "https://github.com/Angel-crypt/Web-project/blob/main/Documents/Especificaciones_Tecnicas_Aprendizaje_con_IA.pdf",
+                "link": "../Public/Especificaciones_Tecnicas.pdf",
                 "icon": "bi bi-file-pdf",
                 "size": "1.2 MB"
             },
