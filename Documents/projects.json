@@ -1,0 +1,277 @@
+[
+    {
+        "id": "1",
+        "name": "Aprendizaje con IA",
+        "status": "despegando",
+        "startDate": "March 10, 2025",
+        "dueDate": "April 30, 2025",
+        "description": "Desarrollo inicial de una plataforma educativa con inteligencia artificial.",
+        "images": [
+            "images/projects/aprendizaje.webp",
+            "images/projects/aprendizaje.webp",
+            "images/projects/aprendizaje.webp"
+        ],
+        "features": [
+            "Sistema de recomendación personalizado",
+            "Análisis de desempeño basado en IA",
+            "Interacción con asistentes virtuales",
+            "Soporte para múltiples idiomas",
+            "Evaluaciones automáticas"
+        ],
+        "documents": [
+            {
+                "name": "Propuesta del Proyecto.pdf",
+                "link": "https://github.com/Angel-crypt/Web-project/blob/main/Documents/Especificaciones_Tecnicas_Aprendizaje_con_IA.pdf",
+                "icon": "bi bi-file-pdf",
+                "size": "1.2 MB"
+            },
+            {
+                "name": "Especificaciones Técnicas.pdf",
+                "link": "#",
+                "icon": "bi bi-file-pdf",
+                "size": "2.5 MB"
+            },
+            {
+                "name": "Informe de Progreso.docx",
+                "link": "#",
+                "icon": "bi bi-file-word",
+                "size": "3.0 MB"
+            }
+        ],
+        "progress": 10,
+        "milestones": [
+            "Diseño de la plataforma",
+            "Integración de modelos de IA",
+            "Pruebas iniciales con usuarios",
+            "Optimización del rendimiento"
+        ],
+        "teamMembers": [
+            {
+                "name": "Angel Cruz",
+                "role": "Líder del Proyecto"
+            },
+            {
+                "name": "Ana Gómez",
+                "role": "Especialista en IA"
+            },
+            {
+                "name": "Luis Fernández",
+                "role": "Desarrollador Backend"
+            }
+        ],
+        "tasksCompleted": 5,
+        "totalTasks": 50,
+        "hoursLogged": 20,
+        "timeline": [
+            {
+                "date": "March 10, 2025",
+                "description": "Inicio del proyecto"
+            },
+            {
+                "date": "March 25, 2025",
+                "description": "Entrega del diseño UI/UX"
+            },
+            {
+                "date": "April 10, 2025",
+                "description": "Pruebas de funcionalidad iniciales"
+            },
+            {
+                "date": "April 30, 2025",
+                "description": "Entrega de prototipo inicial"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Sistema de Energía Solar",
+        "status": "marcha",
+        "startDate": "February 25, 2025",
+        "dueDate": "June 15, 2025",
+        "description": "Optimización del rendimiento de paneles solares con análisis de datos.",
+        "images": [
+            "images/projects/solar.webp"
+        ],
+        "features": [
+            "Monitoreo en tiempo real de paneles solares",
+            "Algoritmo de predicción de eficiencia",
+            "Sistema de reportes automatizados"
+        ],
+        "documents": [
+            {
+                "name": "Especificaciones Técnicas.pdf",
+                "link": "#",
+                "icon": "bi bi-file-pdf",
+                "size": "2.5 MB"
+            }
+        ],
+        "progress": 50,
+        "milestones": [
+            "Análisis de datos inicial",
+            "Optimización del algoritmo de eficiencia"
+        ],
+        "teamMembers": [
+            {
+                "name": "Luis Rodríguez",
+                "role": "Ingeniero de Energía"
+            }
+        ],
+        "tasksCompleted": 25,
+        "totalTasks": 50,
+        "hoursLogged": 150,
+        "timeline": [
+            {
+                "date": "February 25, 2025",
+                "description": "Inicio del proyecto"
+            },
+            {
+                "date": "June 15, 2025",
+                "description": "Entrega de análisis final"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Reconocimiento Facial",
+        "status": "fuego",
+        "startDate": "January 18, 2025",
+        "dueDate": "May 1, 2025",
+        "description": "Implementación avanzada de reconocimiento facial en tiempo real.",
+        "images": [
+            "images/projects/facial.webp"
+        ],
+        "features": [
+            "Reconocimiento facial en tiempo real",
+            "Base de datos encriptada para almacenamiento seguro",
+            "Integración con hardware de control de acceso"
+        ],
+        "documents": [
+            {
+                "name": "Manual de Implementación.pdf",
+                "link": "#",
+                "icon": "bi bi-file-pdf",
+                "size": "1.8 MB"
+            }
+        ],
+        "progress": 85,
+        "milestones": [
+            "Pruebas de precisión",
+            "Despliegue en servidores"
+        ],
+        "teamMembers": [
+            {
+                "name": "María López",
+                "role": "Especialista en Seguridad"
+            }
+        ],
+        "tasksCompleted": 40,
+        "totalTasks": 50,
+        "hoursLogged": 200,
+        "timeline": [
+            {
+                "date": "January 18, 2025",
+                "description": "Inicio del desarrollo"
+            },
+            {
+                "date": "May 1, 2025",
+                "description": "Entrega del producto final"
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Red Social Universitaria",
+        "status": "Standby",
+        "startDate": "March 12, 2025",
+        "dueDate": "July 10, 2025",
+        "description": "Desarrollo de una red social para conectar estudiantes y profesores.",
+        "images": [
+            "images/projects/red-social.webp"
+        ],
+        "features": [
+            "Mensajería instantánea y foros de discusión",
+            "Creación de perfiles académicos",
+            "Eventos y actividades universitarias"
+        ],
+        "documents": [
+            {
+                "name": "Plan de Desarrollo.pdf",
+                "link": "#",
+                "icon": "bi bi-file-pdf",
+                "size": "1.5 MB"
+            }
+        ],
+        "progress": 30,
+        "milestones": [
+            "Prototipo funcional",
+            "Integración con LMS (en progreso)"
+        ],
+        "teamMembers": [
+            {
+                "name": "Carlos López",
+                "role": "Coordinador de Proyecto"
+            }
+        ],
+        "tasksCompleted": 15,
+        "totalTasks": 50,
+        "hoursLogged": 120,
+        "timeline": [
+            {
+                "date": "March 12, 2025",
+                "description": "Inicio del proyecto"
+            },
+            {
+                "date": "July 10, 2025",
+                "description": "Lanzamiento beta"
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "name": "Simulación de Robots Autónomos",
+        "status": "Terminado",
+        "startDate": "December 5, 2024",
+        "dueDate": "March 15, 2025",
+        "description": "Proyecto exitoso sobre simulación de robots con IA.",
+        "images": [
+            "images/projects/robots.webp"
+        ],
+        "features": [
+            "Modelado 3D de robots",
+            "Pruebas en entornos simulados",
+            "Optimización de rutas con IA"
+        ],
+        "documents": [
+            {
+                "name": "Informe Final.pdf",
+                "link": "#",
+                "icon": "bi bi-file-pdf",
+                "size": "2.8 MB"
+            }
+        ],
+        "progress": 100,
+        "milestones": [
+            "Desarrollo del motor de simulación",
+            "Validación del modelo IA"
+        ],
+        "teamMembers": [
+            {
+                "name": "Elena Martínez",
+                "role": "Ingeniera en Robótica"
+            }
+        ],
+        "tasksCompleted": 50,
+        "totalTasks": 50,
+        "hoursLogged": 220,
+        "timeline": [
+            {
+                "date": "December 5, 2024",
+                "description": "Inicio del proyecto"
+            },
+            {
+                "date": "March 15, 2025",
+                "description": "Entrega final"
+            }
+        ]
+    }
+]
+
