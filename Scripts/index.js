@@ -3,6 +3,22 @@ function toggleTheme() {
     body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
 }
 
+function getStatusEmoji(status) {
+    const emojis = {
+        "despegando": "🚀",
+        "marcha": "⚙️",
+        "fuego": "🔥",
+        "standby": "⏸️",
+        "terminado": "🏁",
+        "bocetando": "📝"
+    };
+    return emojis[status] || "";
+}
+
+function formatStatus(status) {
+    return status.replace("-", " ").toUpperCase();
+}
+
 // Animacion de texto
 
 const texts = [
