@@ -10,7 +10,9 @@ async function loadProjectDetails(projectId) {
                     <div class="col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-light p-2 rounded shadow-sm">
-                                <li class="breadcrumb-item"><a href="projects.html" class="text-decoration-none"><i class="bi bi-grid me-1"></i>Proyectos</a></li>
+                                <li class="breadcrumb-item">
+                                    <a href="projects.html" class="text-decoration-none">Proyectos</a>
+                                </li>
                                 <li class="breadcrumb-item active fw-medium">${project.name}</li>
                             </ol>
                         </nav>
@@ -28,8 +30,8 @@ async function loadProjectDetails(projectId) {
                         </div>
                     </div>
                     <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                        <button class="btn btn-outline-primary me-2 shadow-sm" id="favoriteButton" onclick="toggleFavorite(project.id)">
-                            <i class="bi bi-star me-1" id="favoriteIcon"></i> <span id="favoriteText">Favorito</span>
+                        <button class="btn btn-outline-primary me-2 shadow-sm favorite-btn" id="favoriteButton" onclick="toggleFavorite('${project.id}')">
+                            <i class="bi bi-star" id="favoriteIcon"></i>
                         </button>
                         <div class="dropdown d-inline-block">
                             <button class="btn btn-primary shadow-sm dropdown-toggle" type="button" id="shareButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -91,7 +93,7 @@ async function loadProjectDetails(projectId) {
                             <div class="card-body">
                                 <div class="list-group">
                                     ${project.documents.map(doc => `
-                                        <a href="${doc.link}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 border-bottom py-3 px-0">
+                                        <a href="${doc.link}" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 border-bottom py-3 px-0">
                                             <div>
                                                 <i class="${doc.icon} me-2 text-primary"></i>
                                                 <span class="fw-medium">${doc.name}</span>
@@ -195,7 +197,8 @@ async function loadProjectDetails(projectId) {
                         </div>
                     </div>
                 </div>
-            `;
+            `
+            checkFavoriteStatus(projectId);
         } else {
             document.getElementById('projectDetailsContainer').innerHTML = '<p>Detalles del proyecto no disponibles.</p>';
         }
@@ -221,14 +224,42 @@ function getTimelineColor(index) {
     return colors[index % colors.length];
 }
 
-// Verificamos si el proyecto es favorito al cargar
-document.addEventListener('DOMContentLoaded', function () {
-    checkFavoriteStatus(project.id);
-});
-
-// Función para verificar si el proyecto está en favoritos
-function checkFavoriteStatus(projectId) {
+function toggleFavorite(projectId) {
     // Obtener favoritos del localStorage
+    const favorites = JSON.parse(localStorage.getItem('favoriteProjects')) || [];
+    const index = favorites.indexOf(projectId);
+    const favoriteBtn = document.getElementById('favoriteButton');
+    const icon = document.getElementById('favoriteIcon');
+
+    // Añadir clase para animación
+    icon.classList.add('star-animate');
+
+    // Quitar la clase de animación después de que termine
+    setTimeout(() => {
+        icon.classList.remove('star-animate');
+    }, 500);
+
+    // Añadir o quitar según el estado actual
+    if (index === -1) {
+        // Si no está en favoritos, añadirlo
+        favorites.push(projectId);
+        showNotification('Añadido a favoritos', 'El proyecto ha sido añadido a tus favoritos.');
+        icon.classList.remove('bi-star');
+        icon.classList.add('bi-star-fill');
+        favoriteBtn.classList.add('active');
+    } else {
+        // Si ya está en favoritos, quitarlo
+        favorites.splice(index, 1);
+        showNotification('Eliminado de favoritos', 'El proyecto ha sido eliminado de tus favoritos.');
+        icon.classList.remove('bi-star-fill');
+        icon.classList.add('bi-star');
+        favoriteBtn.classList.remove('active');
+    }
+    // Guardar en localStorage
+    localStorage.setItem('favoriteProjects', JSON.stringify(favorites));
+}
+
+function checkFavoriteStatus(projectId) {
     const favorites = JSON.parse(localStorage.getItem('favoriteProjects')) || [];
     const isFavorite = favorites.includes(projectId);
 
@@ -236,45 +267,20 @@ function checkFavoriteStatus(projectId) {
     updateFavoriteButton(isFavorite);
 }
 
-// Función para actualizar la apariencia del botón de favoritos
 function updateFavoriteButton(isFavorite) {
     const icon = document.getElementById('favoriteIcon');
     const text = document.getElementById('favoriteText');
-    const button = document.getElementById('favoriteButton');
+    const favoriteBtn = document.getElementById('favoriteButton');
 
     if (isFavorite) {
         icon.classList.remove('bi-star');
         icon.classList.add('bi-star-fill');
-        text.textContent = 'Favorito';
-        button.classList.add('active');
+        favoriteBtn.classList.add('active');
     } else {
         icon.classList.remove('bi-star-fill');
         icon.classList.add('bi-star');
-        text.textContent = 'Añadir a favoritos';
-        button.classList.remove('active');
+        favoriteBtn.classList.remove('active');
     }
-}
-
-// Función para añadir/quitar de favoritos
-function toggleFavorite(projectId) {
-    // Obtener favoritos del localStorage
-    const favorites = JSON.parse(localStorage.getItem('favoriteProjects')) || [];
-    const index = favorites.indexOf(projectId);
-
-    // Añadir o quitar según el estado actual
-    if (index === -1) {
-        favorites.push(projectId);
-        showNotification('Añadido a favoritos', 'El proyecto ha sido añadido a tus favoritos.');
-    } else {
-        favorites.splice(index, 1);
-        showNotification('Eliminado de favoritos', 'El proyecto ha sido eliminado de tus favoritos.');
-    }
-
-    // Guardar en localStorage
-    localStorage.setItem('favoriteProjects', JSON.stringify(favorites));
-
-    // Actualizar la apariencia del botón
-    checkFavoriteStatus(projectId);
 }
 
 // Función para compartir el proyecto
