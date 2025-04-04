@@ -1,0 +1,76 @@
+.footer {
+    background-color: var(--card);
+    border-top: 1px solid var(--border);
+}
+
+.footer-title {
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+.footer-link {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.text-muted {
+    color: var(--card-foreground) !important;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+.social-links a {
+    color: var(--foreground);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+}
+
+.newsletter-form .form-control {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.form-control::placeholder {
+    border: 1px solid var(--border);
+    color: var(--foreground);
+}
+
+.newsletter-form .form-control:focus {
+    box-shadow: none;
+    border-color: var(--primary);
+}
+
+/* Estilo de Estado */
+.despegando {
+    background-color: #026b8b;
+}
+
+.marcha {
+    background-color: #f0ad4e;
+}
+
+.fuego {
+    background-color: #28a745;
+}
+
+.standby {
+    background-color: #6c757d;
+}
+
+.terminado {
+    background-color: #6f42c1;
+}
+
+.bocetando {
+    background-color: #ffc107;
+    color: #212529;
+}

@@ -1,0 +1,45 @@
+.navbar {
+    background-color: var(--background);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    text-align: center;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: var(--primary);
+}
+
+.nav-link {
+    color: var(--foreground);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: var(--bs-primary) !important;
+}
+
+.nav-link#selected {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    background-color: var(--primary);
+    border: none;
+    color: var(--background);
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}

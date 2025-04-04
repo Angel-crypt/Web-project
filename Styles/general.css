@@ -1,0 +1,65 @@
+:root {
+    --tech: #1A73E8;
+    --science: #4CAF50;
+    --art: #FF5722;
+    --innovation: #FFC107;
+    --health: #E91E63;
+    --education: #673AB7;
+    --software: #2196F3;
+    --hardware: #607D8B;
+    --ai: #00E5FF;
+
+    --primary: #1976D2;
+    --primary-foreground: #ffffff;
+    --secondary: #7B1FA2;
+    --secondary-foreground: #FFFFFF;
+    --accent: #00796B;
+    --accent-foreground: #FFFFFF;
+    --background: #F8F7F2;
+    --foreground: #333333;
+    --card: #F3F2EC;
+    --card-foreground: #333333;
+    --border: #D8D3C5;
+    --input: #EFEDE7;
+    --ring: #1976D2;
+    --radius: 0.5rem;
+    --shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+    --primary: #4285F4;
+    --primary-foreground: #FFFFFF;
+    --secondary: #8E24AA;
+    --secondary-foreground: #FFFFFF;
+    --accent: #26A69A;
+    --accent-foreground: #FFFFFF;
+    --background: #1A1A1A;
+    --foreground: #EEEEEE;
+    --card: #272727;
+    --card-foreground: #EEEEEE;
+    --border: #3A3A3A;
+    --input: #333333;
+    --ring: #4285F4;
+    --radius: 0.5rem;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--foreground);
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--input);
+}
