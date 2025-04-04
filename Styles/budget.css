@@ -1,3 +1,21 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100wvh;
+}
+
+main {
+    flex: 1;
+    /* ocupa el espacio restante entre navbar y footer */
+}
+
     .card {
         background-color: var(--card);
         color: var(--foreground);
