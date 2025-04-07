@@ -2,13 +2,21 @@
 function toggleTheme() {
     const body = document.body;
     body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
-    // Guardar la preferencia en localStorage
     localStorage.setItem('theme', body.dataset.theme);
 }
+
+// Funcion para alternar la apariencia
+function setColorScheme(scheme) {
+    document.documentElement.setAttribute('data-color-scheme', scheme);
+    localStorage.setItem('color-scheme', scheme);
+}
+
 
 // Función para cargar el tema guardado
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
+    const savedColorScheme = localStorage.getItem('color-scheme');
+    setColorScheme(savedColorScheme);
     if (savedTheme) {
         document.body.dataset.theme = savedTheme;
     }

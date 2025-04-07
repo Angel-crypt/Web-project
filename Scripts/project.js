@@ -120,7 +120,7 @@ async function loadProjectDetails(projectId) {
                                     <div class="progress-bar bg-success" role="progressbar" style="width: ${project.progress}%" aria-valuenow="${project.progress}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="text-end mb-4">
-                                    <span class="fw-bold text-success">${project.progress}% completado</span>
+                                    <span class="fw-bold text-success percentage">${project.progress}% completado</span>
                                 </div>
                                 
                                 <div class="milestones mt-4">
@@ -176,7 +176,7 @@ async function loadProjectDetails(projectId) {
                                 </div>
                                 <div class="stats-item d-flex justify-content-between">
                                     <span class="fw-medium"><i class="bi bi-people-fill me-2 text-primary"></i>Miembros</span>
-                                    <span class="badge bg-primary shadow-sm">${project.teamMembers.length}</span>
+                                    <span class="badge bg-primary shadow-sm members-count">${project.teamMembers.length}</span>
                                 </div>
                             </div>
                         </div>

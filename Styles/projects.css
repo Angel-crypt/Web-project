@@ -209,3 +209,7 @@
     box-shadow: none;
     border-color: var(--primary);
 }
+
+.fst-italic{
+    color: var(--primary) !important;
+}

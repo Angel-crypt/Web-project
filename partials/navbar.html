@@ -10,7 +10,42 @@
                 <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="community.html">Comunidad</a></li>
                 <li class="nav-item"><a class="nav-link" href="budget.html">Presupuestos</a></li>
-                <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                <li class="nav-item dropdown">
+                    <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-circle-half"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2" onclick="setColorScheme('blue')" data-color="blue">
+                                <span class="color-swatch color-preview"
+                                    style="background: linear-gradient(135deg, #1a73e8 50%, #4285f4 50%);"></span>
+                                Blue
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2" onclick="setColorScheme('green')" data-color="green">
+                                <span class="color-swatch color-preview"
+                                    style="background: linear-gradient(135deg, #0f9d58 50%, #34a853 50%);"></span>
+                                Green
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2" onclick="setColorScheme('purple')"
+                                data-color="purple">
+                                <span class="color-swatch color-preview"
+                                    style="background: linear-gradient(135deg, #673ab7 50%, #9c27b0 50%);"></span>
+                                Purple
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2" onclick="setColorScheme('red')" data-color="red">
+                                <span class="color-swatch color-preview"
+                                    style="background: linear-gradient(135deg, #db4437 50%, #ea4335 50%);"></span>
+                                Red
+                            </button>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <button class="theme-toggle btn" onclick="toggleTheme()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

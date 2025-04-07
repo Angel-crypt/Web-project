@@ -7,7 +7,7 @@
 .btn-primary {
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     border: none;
-    color: var(--primary-foreground);
+    color: #FFFFFF;
 }
 
 .btn-outline-primary {
@@ -219,7 +219,7 @@
 .circle {
     width: 20px;
     height: 20px;
-    border: 1px solid #77b2ff;
+    border: 1px solid var(--primary) !important;
     position: absolute;
     border-radius: 50%;
 }

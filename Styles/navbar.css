@@ -6,7 +6,7 @@
 
 .navbar-brand {
     text-align: center;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    background: linear-gradient(45deg, #1A73E8, #6A1B9A);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
@@ -27,7 +27,7 @@
 
 .nav-link.active {
     font-weight: bold;
-    color: var(--bs-primary) !important;
+    color: var(--primary) !important;
 }
 
 .nav-link#selected {
@@ -42,4 +42,76 @@
     padding: 0.5rem;
     border-radius: var(--radius);
     transition: all 0.3s ease;
+}
+
+.color-preview {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-toggle {
+    background: transparent;
+    border: none;
+    color: var(--foreground);
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle::after {
+    color: var(--primary) !important;
+    display: none !important;
+}
+
+.dropdown-menu {
+    background-color: var(--card);
+    border-color: none;
+}
+
+.dropdown-item {
+    color: var(--foreground);
+}
+
+.dropdown-item:hover {
+    background-color: var(--input);
+    color: var(--primary);
+    border-color: none;
+}
+
+.color-swatch {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-color: none;
+}
+
+/* Estilo base para los botones */
+button.dropdown-item {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Efecto hover para cada color */
+button.dropdown-item:hover {
+    color: white;
+}
+
+button.dropdown-item:hover[data-color="blue"] {
+    background: linear-gradient(135deg, #1a73e8 50%, #4285f4 50%);
+}
+
+button.dropdown-item:hover[data-color="green"] {
+    background: linear-gradient(135deg, #0f9d58 50%, #34a853 50%);
+}
+
+button.dropdown-item:hover[data-color="purple"] {
+    background: linear-gradient(135deg, #673ab7 50%, #9c27b0 50%);
+}
+
+button.dropdown-item:hover[data-color="red"] {
+    background: linear-gradient(135deg, #db4437 50%, #ea4335 50%);
 }

@@ -117,3 +117,7 @@
     box-shadow: none;
     border-color: var(--primary);
 }
+
+.rounded-pill{
+    background-color: var(--primary) !important;
+}
