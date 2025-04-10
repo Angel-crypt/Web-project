@@ -1,20 +1,31 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
+        <!-- Logo del sitio -->
         <a class="navbar-brand" href="index.html">Project Hub</a>
+
+        <!-- Botón hamburguesa para responsive -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Contenido del navbar -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <!-- Enlaces principales -->
                 <li class="nav-item"><a class="nav-link" href="projects.html">Proyectos</a></li>
                 <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
                 <li class="nav-item"><a class="nav-link" href="community.html">Comunidad</a></li>
                 <li class="nav-item"><a class="nav-link" href="budget.html">Presupuestos</a></li>
+                
+                <!-- Selector de esquema de color -->
                 <li class="nav-item dropdown">
                     <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-circle-half"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                        <!-- Botones para cambiar de esquema de color -->
+                        <!-- Cada color activa setColorScheme con su nombre correspondiente -->
+                        <!-- Idealmente, guardar preferencia en localStorage -->
                         <li>
                             <button class="dropdown-item d-flex align-items-center gap-2" onclick="setColorScheme('blue')" data-color="blue">
                                 <span class="color-swatch color-preview"
@@ -44,10 +55,21 @@
                                 Red
                             </button>
                         </li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2" onclick="setColorScheme('orange')"
+                                data-color="orange">
+                                <span class="color-swatch color-preview"
+                                    style="background: linear-gradient(135deg, #f4b400 50%, #ff9800 50%);"></span>
+                                Orange
+                            </button>
+                        </li>
                     </ul>
                 </li>
+
+                <!-- Toggle para tema claro/oscuro -->
                 <li class="nav-item">
                     <button class="theme-toggle btn" onclick="toggleTheme()">
+                        <!-- Ícono de luna/estrellas -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-moon-stars" viewBox="0 0 16 16">
                             <path

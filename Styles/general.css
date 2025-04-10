@@ -1,3 +1,6 @@
+/* Estilos generales de la aplicación */
+
+/* Definición de variables de color para el tema */
 :root {
     --tech: #1A73E8;
     --science: #4CAF50;
@@ -25,6 +28,10 @@
     --secondary-red: #C62828;
     --accent-red: #B71C1C;
 
+    --primary-orange: #FF9800;
+    --secondary-orange: #F57C00;
+    --accent-orange: #E65100;
+
     --background: #FFFFFF;
     --foreground: #1A1A1A;
     --card: #F8F9FA;
@@ -35,30 +42,43 @@
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
+/* Definicion de color scheme */
+/* Color scheme para color azul */
 [data-color-scheme='blue'] {
     --primary: var(--primary-blue);
     --secondary: var(--secondary-blue);
     --accent: var(--accent-blue);
 }
 
+/* Color scheme para color verde */
 [data-color-scheme='green'] {
     --primary: var(--primary-green);
     --secondary: var(--secondary-green);
     --accent: var(--accent-green);
 }
 
+/* Color scheme para color morado */
 [data-color-scheme='purple'] {
     --primary: var(--primary-purple);
     --secondary: var(--secondary-purple);
     --accent: var(--accent-purple);
 }
 
+/* Color scheme para color rojo */
 [data-color-scheme='red'] {
     --primary: var(--primary-red);
     --secondary: var(--secondary-red);
     --accent: var(--accent-red);
 }
 
+/* Color scheme para color naranja */
+[data-color-scheme='orange'] {
+    --primary: var(--primary-orange);
+    --secondary: var(--secondary-orange);
+    --accent: var(--accent-orange);
+}
+
+/* Color del tema oscuro */
 [data-theme="dark"] {
     --background: #121212;
     --foreground: #FFFFFF;
@@ -68,6 +88,7 @@
     --input: #2D2D2D;
 }
 
+/* Estilos generales */
 body {
     background-color: var(--background);
     color: var(--foreground);

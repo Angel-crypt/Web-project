@@ -1,3 +1,4 @@
+// Array de proyectos por defecto
 const defaultProjects = [
     {   
         id: 1,
@@ -188,23 +189,32 @@ const defaultProjects = [
     }
 ];
 
+// Función para cargar el contenededor de proyectos
 const projectsContainer = document.querySelector(".row.g-4");
 
+// Funcion para formatear la fecha
 function formatDate(dateString) {
     const [year, month, day] = dateString.split("-");
     return `${day}/${month}/${year}`; // Convierte YYYY-MM-DD a DD/MM/YYYY
 }
 
+// Funcion para renderizar un proyecto
 function renderProjects() {
+    // Obtener los proyectos almacenados en localStorage
     let storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
 
+    // Si no hay proyectos almacenados, se cargan los proyectos por defecto
     if (storedProjects.length === 0) {
         storedProjects = [...defaultProjects];
         localStorage.setItem("projects", JSON.stringify(storedProjects));
     }
 
+    // Limpiar el contenedor de proyectos antes de renderizar
     projectsContainer.innerHTML = "";
+
+    // Recorrer los proyectos y renderizarlos
     storedProjects.forEach((project, projectIndex) => {
+        // Compara la fecha de entrega con la fecha prevista
         const dateLabel = (project.status === "terminado" && project.progress === 100) ? "Fecha de Entrega" : "Fecha Prevista";
 
         // Renderizar etiquetas con colores según los tags
@@ -288,11 +298,13 @@ function renderProjects() {
     });
 }
 
+// Función para validar URL de una imagen
 function isValidUrl(url) {
     const regex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm;
     return regex.test(url);
 }
 
+// Funcion para agregar un nuevo proyecto
 document.addEventListener("DOMContentLoaded", () => {
     renderProjects();
 
@@ -307,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tagsInput = document.querySelector("#projectTags");
     const tagsContainer = document.querySelector("#tagsContainer");
 
+    // Inicializar etiquetas seleccionadas
     let selectedTags = [];
     const availableTags = ["Tecnología", "Ciencia", "Arte", "Innovación", "Salud", "Educación", "Software", "Hardware", "IA"];
 
@@ -397,11 +410,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const status = document.querySelector("#projectStatus").value;
         const imageUrl = document.querySelector("#projectImage").value.trim();
 
+        // Validar campos requeridos
         if (!name || !description || !status) {
             alert("Por favor, completa todos los campos.");
             return;
         }
 
+        // Asignar progreso según el estado
         let progress;
         switch (status) {
             case "despegando": progress = 10; break;
@@ -413,6 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
             default: progress = 0;
         }
 
+        // Validar fecha de entrega y fecha de creación
         if (!dueDate) {
             const currentDate = new Date();
             currentDate.setMonth(currentDate.getMonth() + 6);
@@ -425,6 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
             creationDate = currentDate.toLocaleDateString("es-ES");
         }
 
+        // Validar URL de imagen
         let image = "images/projects/default.webp";
         if (imageUrl && isValidUrl(imageUrl)) {
             image = imageUrl;
@@ -435,6 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
             storedProjects = [...defaultProjects];
         }
 
+        // Guardar el nuevo proyecto
         storedProjects.push({
             name,
             description,
@@ -446,6 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tags: [...selectedTags]
         });
 
+        // Guardar en localStorage
         localStorage.setItem("projects", JSON.stringify(storedProjects));
 
         // Resetear el formulario y limpiar etiquetas
@@ -466,18 +485,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Filtrar proyectos
-
+// Agrega un evento de cambio a los filtros
 document.getElementById('statusFilter').addEventListener('change', filterProjects);
 document.getElementById('projectTags').addEventListener('input', filterProjects);
 document.getElementById('searchFilter').addEventListener('input', filterProjects);
 document.getElementById('sortFilter').addEventListener('change', filterProjects);
 
+// Función para filtrar proyectos
 function filterProjects() {
+    // Obtener valores de los filtros
     const status = document.getElementById('statusFilter').value.toLowerCase();
     const member = document.getElementById('projectTags').value.toLowerCase();
     const search = document.getElementById('searchFilter').value.toLowerCase();
     const sortBy = document.getElementById('sortFilter').value.toLowerCase();
 
+    // Obtener los proyectos almacenados en localStorage
     let storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
     if (storedProjects.length === 0) {
         storedProjects = [...defaultProjects];
@@ -561,6 +583,7 @@ function filterProjects() {
     });
 }
 
+// Funcion para obtener la clase de la etiqueta
 function getTagClass(tag) {
     switch (tag.toLowerCase()) {
         case 'tecnología': return 'badge-tech';
@@ -576,6 +599,7 @@ function getTagClass(tag) {
     }
 }
 
+// Funcion que determina el estado del proyecto
 function getStatusDateLabel(project) {
     return (project.status === "terminado" && project.progress === 100) ? "Fecha de Entrega" : "Fecha Prevista";
 }

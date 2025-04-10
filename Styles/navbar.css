@@ -1,3 +1,4 @@
+/* Estilo base para el navbar */
 .navbar {
     background-color: var(--background);
     border-bottom: 1px solid var(--border);
@@ -114,4 +115,8 @@ button.dropdown-item:hover[data-color="purple"] {
 
 button.dropdown-item:hover[data-color="red"] {
     background: linear-gradient(135deg, #db4437 50%, #ea4335 50%);
+}
+
+button.dropdown-item:hover[data-color="orange"] {
+    background: linear-gradient(135deg, #f57c00 50%, #ff9800 50%);
 }

@@ -1,9 +1,12 @@
+// Script para cargar los detalles del proyecto desde un archivo JSON y mostrarlo en la página
 async function loadProjectDetails(projectId) {
     try {
-        const response = await fetch('../Documents/projects.json'); // Cambia la ruta si es necesario
-        const projects = await response.json();
-        const project = projects.find(p => p.id === projectId);
+        const response = await fetch('../Documents/projects.json');
+        const projects = await response.json(); // Cargar los proyectos desde el archivo JSON
+        const project = projects.find(p => p.id === projectId); // Buscar el proyecto por ID
+        // Verificar si el proyecto existe
         if (project) {
+            // Renderizar los detalles del proyecto en el contenedor correspondiente
             document.getElementById('projectDetailsContainer').innerHTML = `
                 <!-- Header y breadcrumb mejorados -->
                 <div class="row mb-4">
@@ -203,18 +206,22 @@ async function loadProjectDetails(projectId) {
                     </div>
                 </div>
             `
-            checkFavoriteStatus(projectId);
+            checkFavoriteStatus(projectId); // Verificar si el proyecto está en favoritos
         } else {
+            // Mostrar mensaje de error si no se encuentra el proyecto
             document.getElementById('projectDetailsContainer').innerHTML = '<p>Detalles del proyecto no disponibles.</p>';
         }
     } catch (error) {
+        // Manejo de errores al cargar el archivo JSON
         console.error('Error al cargar los datos:', error);
     }
 }
 
 // Función para obtener el parámetro de la URL
 function getQueryParam(param) {
+    // Crear un objeto URLSearchParams para manejar los parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
+    // Devolver el valor del parámetro especificado
     return urlParams.get(param);
 }
 
@@ -224,16 +231,23 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProjectDetails(projectId); // Cargar los detalles del proyecto
 });
 
+// Funciones auxiliares para el manejo de favoritos y compartir
 function getTimelineColor(index) {
+    // Devuelve una clase de color para la línea de tiempo basada en el índice
     const colors = ['border-primary text-primary', 'border-success text-success', 'border-info text-info', 'border-warning text-warning'];
+    // Puedes agregar más colores según sea necesario
     return colors[index % colors.length];
 }
 
+// Función para alternar el estado de favorito
 function toggleFavorite(projectId) {
     // Obtener favoritos del localStorage
     const favorites = JSON.parse(localStorage.getItem('favoriteProjects')) || [];
+    // Verificar si el proyecto ya está en favoritos
     const index = favorites.indexOf(projectId);
+    // Seleccionar el botón y el icono
     const favoriteBtn = document.getElementById('favoriteButton');
+    // Seleccionar el icono del botón de favoritos
     const icon = document.getElementById('favoriteIcon');
 
     // Añadir clase para animación
@@ -264,6 +278,7 @@ function toggleFavorite(projectId) {
     localStorage.setItem('favoriteProjects', JSON.stringify(favorites));
 }
 
+// Función para verificar el estado de favorito al cargar la página
 function checkFavoriteStatus(projectId) {
     const favorites = JSON.parse(localStorage.getItem('favoriteProjects')) || [];
     const isFavorite = favorites.includes(projectId);
@@ -272,6 +287,7 @@ function checkFavoriteStatus(projectId) {
     updateFavoriteButton(isFavorite);
 }
 
+// Función para actualizar el botón de favoritos
 function updateFavoriteButton(isFavorite) {
     const icon = document.getElementById('favoriteIcon');
     const favoriteBtn = document.getElementById('favoriteButton');
@@ -287,10 +303,11 @@ function updateFavoriteButton(isFavorite) {
     }
 }
 
-
+// Función para compartir el proyecto
 function shareProject(platform, projectId) {
-    let shareUrl = `https://example.com/project/${projectId}`;
-    let message = `¡Mira este increíble proyecto en ProjectHub!
+    let shareUrl = `https://example.com/project/${projectId}`; // URL del proyecto a compartir
+    // Mensaje a compartir
+    let message = `¡Mira este increíble proyecto en ProjectHub! 
     
                     Descúbrelo aquí: https://example.com/project/1
                     
@@ -298,7 +315,7 @@ function shareProject(platform, projectId) {
 
                     ¡Explora, comparte y crece con nosotros!
                     `;
-
+    // Dependiendo de la plataforma seleccionada, se abrirá el enlace correspondiente
     switch (platform) {
         case 'email':
             window.location.href = `mailto:?subject=Proyecto&body=${message}`;
@@ -314,21 +331,30 @@ function shareProject(platform, projectId) {
     }
 }
 
+// Función para copiar el enlace del proyecto al portapapeles
 function copyProjectLink(projectId) {
-    const shareUrl = `https://example.com/project/${projectId}`;
+    // URL del proyecto a copiar
+    const shareUrl = `https://example.com/project/${projectId}`; // Ajustar según la URL real del proyecto
+    // Copiar al portapapeles
     navigator.clipboard.writeText(shareUrl).then(() => {
+        // Mostrar notificación de éxito
         alert('Enlace copiado al portapapeles: ' + shareUrl);
     }).catch(err => {
+        // Manejar errores al copiar
         console.error('Error al copiar el enlace: ', err);
     });
 }
 
 // Función para mostrar notificaciones
 function showNotification(title, message) {
+    // Mostrar notificación utilizando Bootstrap Toast
     const toast = document.getElementById('notificationToast');
+    // Asegurarse de que el toast esté oculto antes de mostrarlo
     const toastTitle = document.getElementById('toastTitle');
+    // Asegurarse de que el toast esté oculto antes de mostrarlo
     const toastMessage = document.getElementById('toastMessage');
 
+    // Actualizar el contenido del toast
     toastTitle.textContent = title;
     toastMessage.textContent = message;
 

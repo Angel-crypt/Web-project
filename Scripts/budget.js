@@ -172,6 +172,7 @@ function generatePDF() {
             doc.rect(14, yPosition - 6, 182, 10, "F");
         }
 
+        // Texto de los items
         startX = 14;
         const subtotal = (item.price * item.quantity).toFixed(2);
 
@@ -213,12 +214,12 @@ function generatePDF() {
     doc.text(`Subtotal:`, 125, yPosition + 5);
     doc.text(`$${subtotal.toFixed(2)}`, 196, yPosition + 5, { align: "right" });
 
-    doc.text(`Impuesto (16%):`, 125, yPosition + 15);
+    doc.text(`Impuesto (16%):`, 125, yPosition + 25);
     doc.text(`$${tax.toFixed(2)}`, 196, yPosition + 15, { align: "right" });
 
     // Línea antes del total
     doc.setDrawColor(secondaryColor);
-    doc.line(125, yPosition + 20, 196, yPosition + 20);
+    doc.line(125, yPosition + 20, 196, yPosition + 45);
 
     // Total con estilo destacado
     doc.setFont("helvetica", "bold");
