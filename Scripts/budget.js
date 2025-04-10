@@ -89,11 +89,9 @@ function updateSummary() {
     document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 }
 
-// Función para generar el PDF
+// Función para crear el PDF
 function generatePDF() {
     const { jsPDF } = window.jspdf;
-
-    // Crear nuevo documento con orientación portrait
     const doc = new jsPDF();
 
     // Definir colores
@@ -103,142 +101,112 @@ function generatePDF() {
     const textColor = "#333333";
     const lightGray = "#F3F2EC";
 
-    // Agregar cabecera con fondo de color
-    doc.setFillColor(primaryColor);
-    doc.rect(0, 0, 210, 40, "F");
+    // Obtener los ítems del localStorage
+    const items = JSON.parse(localStorage.getItem('items')) || []; // Asegurarse de que no esté vacío
 
-    // Título del PDF
+    // Verificar si hay ítems
+    if (items.length === 0) {
+        alert("No hay ítems para generar la factura.");
+        return;
+    }
+
+    let yPosition = 60; // Inicia en una posición superior para dejar espacio al encabezado
+
+    // Título
     doc.setFont("helvetica", "bold");
-    doc.setTextColor("#FFFFFF");
-    doc.setFontSize(24);
-    doc.text('RESUMEN DE COMPRA', 105, 20, { align: "center" });
-
-    // Fecha actual
-    const currentDate = new Date().toLocaleDateString();
-    doc.setFontSize(10);
-    doc.text(`Fecha: ${currentDate}`, 105, 30, { align: "center" });
-
-    // Sección de items
-    doc.setDrawColor(primaryColor);
-    doc.setLineWidth(0.5);
-    doc.line(14, 50, 196, 50);
-
-    // Título de la sección de items
-    doc.setTextColor(primaryColor);
     doc.setFontSize(16);
+    doc.setTextColor(primaryColor);
+    doc.text("Factura", 14, 30);
+
+    // Encabezados de la tabla
     doc.setFont("helvetica", "bold");
-    doc.text('Detalle de Productos', 14, 60);
-
-    // Cabecera de la tabla
-    const tableHeaders = ["Producto", "Precio Unit.", "Cantidad", "Subtotal"];
-    const columnWidths = [80, 35, 35, 32];
-    let startX = 14;
-    let yPosition = 70;
-
-    // Dibujar cabecera de tabla
-    doc.setFillColor(lightGray);
-    doc.rect(14, yPosition - 6, 182, 10, "F");
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.setTextColor(textColor);
-
-    tableHeaders.forEach((header, index) => {
-        if (index === 0) {
-            doc.text(header, startX, yPosition);
-        } else {
-            doc.text(header, startX + columnWidths[index - 1], yPosition, { align: "right" });
-        }
-        startX += columnWidths[index];
-    });
-
-    // Línea después de la cabecera
-    yPosition += 4;
-    doc.setDrawColor(accentColor);
-    doc.line(14, yPosition, 196, yPosition);
-
-    // Contenido de la tabla
-    yPosition += 10;
-    doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
+    doc.setTextColor(textColor);
+    doc.text("Producto", 14, yPosition);
+    doc.text("Cantidad", 100, yPosition);
+    doc.text("Precio", 140, yPosition);
+    doc.text("Total", 180, yPosition);
+    yPosition += 10;
 
-    // Alternar colores de fila
-    let rowCount = 0;
+    doc.setFont("helvetica", "normal");
 
+    // Imprimir los ítems
     items.forEach(item => {
-        // Alternar colores de fondo para filas
-        if (rowCount % 2 === 1) {
-            doc.setFillColor(245, 245, 245);
-            doc.rect(14, yPosition - 6, 182, 10, "F");
-        }
+        const totalItem = item.price * item.quantity;
 
-        // Texto de los items
-        startX = 14;
-        const subtotal = (item.price * item.quantity).toFixed(2);
-
-        // Producto
-        doc.text(item.name, startX, yPosition);
-
-        // Precio unitario
-        doc.text(`$${item.price.toFixed(2)}`, startX + columnWidths[0], yPosition, { align: "right" });
-
-        // Cantidad
-        doc.text(`${item.quantity}`, startX + columnWidths[0] + columnWidths[1], yPosition, { align: "right" });
-
-        // Subtotal
-        doc.text(`$${subtotal}`, startX + columnWidths[0] + columnWidths[1] + columnWidths[2], yPosition, { align: "right" });
+        doc.text(item.name, 14, yPosition);
+        doc.text(item.quantity.toString(), 100, yPosition);
+        doc.text(`$${item.price.toFixed(2)}`, 140, yPosition);
+        doc.text(`$${totalItem.toFixed(2)}`, 180, yPosition, { align: "right" });
 
         yPosition += 10;
-        rowCount++;
     });
 
-    // Línea después de los items
+    // Línea después de los ítems
     doc.setDrawColor(accentColor);
     doc.line(14, yPosition, 196, yPosition);
     yPosition += 15;
 
-    // Sección de resumen
+    // Calcular totales
     const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const tax = subtotal * 0.16;
     const total = subtotal + tax;
 
-    // Crear un box para el resumen
+    // Cuadro resumen
+    doc.setDrawColor(accentColor);
+    doc.setFillColor('#EEEEEE');
+    doc.roundedRect(122, yPosition - 3, 76, 50, 3, 3, 'F');
     doc.setFillColor(lightGray);
-    doc.roundedRect(120, yPosition - 5, 76, 50, 3, 3, "F");
+    doc.roundedRect(120, yPosition - 5, 76, 50, 3, 3, 'FD');
 
-    // Datos del resumen
     doc.setFont("helvetica", "normal");
     doc.setTextColor(textColor);
     doc.setFontSize(11);
-
     doc.text(`Subtotal:`, 125, yPosition + 5);
-    doc.text(`$${subtotal.toFixed(2)}`, 196, yPosition + 5, { align: "right" });
+    doc.text(`$${subtotal.toFixed(2)}`, 186, yPosition + 5, { align: "right" });
 
-    doc.text(`Impuesto (16%):`, 125, yPosition + 25);
-    doc.text(`$${tax.toFixed(2)}`, 196, yPosition + 15, { align: "right" });
+    doc.text(`Impuesto (16%):`, 125, yPosition + 15);
+    doc.text(`$${tax.toFixed(2)}`, 186, yPosition + 15, { align: "right" });
 
-    // Línea antes del total
     doc.setDrawColor(secondaryColor);
-    doc.line(125, yPosition + 20, 196, yPosition + 45);
+    doc.setLineWidth(0.5);
+    doc.line(125, yPosition + 20, 186, yPosition + 20);
 
-    // Total con estilo destacado
     doc.setFont("helvetica", "bold");
     doc.setTextColor(secondaryColor);
     doc.setFontSize(14);
-    doc.text(`TOTAL:`, 125, yPosition + 30);
-    doc.text(`$${total.toFixed(2)}`, 196, yPosition + 30, { align: "right" });
+    doc.text(`TOTAL:`, 125, yPosition + 35);
+    doc.text(`$${total.toFixed(2)}`, 186, yPosition + 35, { align: "right" });
+
+    // Términos y condiciones
+    yPosition += 60;
+    doc.setFont("helvetica", "italic");
+    doc.setTextColor(textColor);
+    doc.setFontSize(8);
+    doc.text("* Los precios incluyen IVA. El pago debe realizarse dentro de los próximos 30 días.", 14, yPosition);
+    doc.text("* Para cualquier consulta relacionada con esta factura, póngase en contacto con nuestro departamento de atención al cliente.", 14, yPosition + 4);
 
     // Pie de página
     doc.setDrawColor(primaryColor);
     doc.setLineWidth(0.5);
     doc.line(14, 270, 196, 270);
 
-    doc.setFont("helvetica", "italic");
+    doc.setFont("helvetica", "normal");
     doc.setTextColor(textColor);
     doc.setFontSize(9);
-    doc.text("Gracias por su compra", 105, 280, { align: "center" });
+    doc.text("Gracias por cotizar en ProjectHub", 105, 275, { align: "center" });
+    doc.setFontSize(8);
+    doc.text("www.ProjectHub.com | contacto@projecthub.com | Tel: (123) 456-7890", 105, 280, { align: "center" });
 
-    // Descargar el PDF
-    doc.save('resumen-compra.pdf');
-    alert("PDF descargado exitosamente.");
+    doc.text(`Página 1 de 1`, 196, 285, { align: "right" });
+
+    // Fecha para nombre del archivo
+    const fechaActual = new Date().toISOString().slice(0, 10);
+    doc.save(`Factura-${fechaActual}.pdf`);
+
+    if (typeof showNotification === 'function') {
+        showNotification("Factura generada exitosamente");
+    } else {
+        alert("Factura generada exitosamente.");
+    }
 }
